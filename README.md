@@ -1,28 +1,18 @@
-== README
+# Game Reporter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup for local development
 
-Things you may want to cover:
+1. Run `vagrant up`
+2. Run `cd /opt/game-reporter`
+3. Run `docker-compose build`
+3. Run `docker-compose up`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Troubleshooting
+* You may have to clear out your `tmp/pids/server.pid` file if you see:
+```
+=> Booting WEBrick
+=> Rails 4.2.5.1 application starting in development on http://localhost:3001
+=> Run `rails server -h` for more startup options
+=> Ctrl-C to shutdown server
+A server is already running. Check /myapp/tmp/pids/server.pid.
+```
