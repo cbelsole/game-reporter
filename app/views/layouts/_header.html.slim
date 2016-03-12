@@ -1,0 +1,24 @@
+nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      - if current_user
+        button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      a.navbar-brand href="#" Game Reporter
+    - if current_user
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              = current_user.email
+              span.caret
+            ul.dropdown-menu
+              li
+                a href="#"  Profile
+              li
+                a href="#"  Stats
+              li
+                = link_to('Logout', destroy_user_session_path)
