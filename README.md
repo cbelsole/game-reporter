@@ -3,9 +3,10 @@
 ## Setup for local development
 
 1. Run `vagrant up`
-2. Run `cd /opt/game-reporter`
-3. Run `docker-compose build`
-3. Run `docker-compose up`
+2. Run `vagrant ssh`
+3. Run `cd /opt/game_reporter`
+4. Run `docker-compose build`
+5. Run `docker-compose up`
 
 ## Troubleshooting
 * You may have to clear out your `tmp/pids/server.pid` file if you see:
