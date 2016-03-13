@@ -17,12 +17,18 @@ ActiveRecord::Schema.define(version: 20160312180738) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.boolean  "active",     default: true
+    t.boolean  "active",                  default: true
+    t.integer  "after_extra_turn_action"
+    t.integer  "extra_turns"
+    t.integer  "games_per_pairing",                      null: false
+    t.integer  "host_id",                                null: false
+    t.string   "name",                                   null: false
+    t.integer  "rounds",                  default: 1,    null: false
     t.datetime "started_at"
-    t.integer  "host_id"
-    t.string   "name"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "time_per_round"
+    t.boolean  "use_game_clock",          default: true
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "users", force: :cascade do |t|

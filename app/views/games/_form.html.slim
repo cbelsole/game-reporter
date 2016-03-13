@@ -7,4 +7,22 @@
           li = message
   = f.label :name
   = f.text_field :name
+  br
+  = f.label :rounds
+  = f.number_field :rounds
+  br
+  = f.label :games_per_pairing
+  = f.number_field :games_per_pairing
+  br
+  = f.label :extra_turns
+  = f.number_field :extra_turns
+  br
+  = f.label :after_extra_turn_action, "What happens after extra turns end?"
+  = select("game", "after_extra_turn_action", Game.after_extra_turn_actions.keys)
+  br
+  = f.label :use_game_clock
+  = f.check_box :use_game_clock
+  br
+  = f.label :time_per_round, "Time per round (minutes)"
+  = f.number_field :time_per_round
   .actions = f.submit
