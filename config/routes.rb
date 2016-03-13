@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   get 'welcome/index'
 
   resources :games, only: [:new] do

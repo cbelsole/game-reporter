@@ -10,12 +10,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(User)
-      if resource.admin?
-        root_paths
-      elsif resource.host?
+      if resource.host?
         new_game_path
       elsif resource.player?
         find_games_path
+      else
+        root_path
       end
     else
       super
