@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   get 'welcome/index'
 
-  resources :games, only: [:new] do
+  resources :games, only: [:index, :show, :new, :create, :update, :edit] do
     collection do
       get :find
     end

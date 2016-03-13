@@ -6,9 +6,9 @@ class Ability
       if user.admin?
         can :manage, :all
       elsif user.host?
-        can :manage, :game
+        can :manage, Game
       else
-        can :read, :game
+        can :read, Game
       end
   end
 end

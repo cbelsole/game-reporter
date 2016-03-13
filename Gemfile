@@ -11,7 +11,7 @@ gem 'slim-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'devise', '= 3.5.6'
-gem 'cancan'
+gem 'cancancan'
 
 group :development, :test do
   gem 'pry-byebug'
