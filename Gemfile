@@ -9,12 +9,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 gem 'slim-rails'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'devise', '= 3.5.6'
 gem 'cancancan'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'rspec', '~> 3.4'
 end
 
 group :development do
