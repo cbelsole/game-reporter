@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :games
+  has_and_belongs_to_many :games
+  has_one :table
+
   enum role: [:player, :host, :admin]
 
   # Include default devise modules. Others available are:

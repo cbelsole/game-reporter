@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   enum after_extra_turn_action: [:nothing, :tie, :both_lose]
 
   belongs_to :host, foreign_type: :host_id, class_name: User
-
+  has_and_belongs_to_many :users
   private
 
   def default_values
