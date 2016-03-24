@@ -3,4 +3,5 @@ class Room < ActiveRecord::Base
 
   has_many :tables
   belongs_to :game
+  belongs_to :host, foreign_type: :host_id, class_name: User
 end

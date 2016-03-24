@@ -25,4 +25,12 @@
   br
   = f.label :time_per_round, "Time per round (minutes)"
   = f.number_field :time_per_round
+
+  h2 Rooms
+
+  = f.label :room_n
+  = select("rooms", "id", options_from_collection_for_select(current_user.rooms, :id, :name), {prompt: 'Select a room'})
+  br
+
+  = link_to 'New Room', new_room_path
   .actions = f.submit
