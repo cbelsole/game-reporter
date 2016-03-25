@@ -1,7 +1,7 @@
-class GamesController < ApplicationController
+class RoomsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   # GET /rooms
   def index
@@ -51,7 +51,7 @@ class GamesController < ApplicationController
   end
 
   private
-    def set_game
+    def set_room
       @room = Room.find(params[:id])
     end
 

@@ -9,6 +9,11 @@ nav.navbar.navbar-default
           span.icon-bar
       a.navbar-brand href="#" Game Reporter
     - if current_user
+      ul.nav.navbar-nav
+        li
+          = link_to "Games", games_path
+        li
+          = link_to "Rooms", rooms_path
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li.dropdown
