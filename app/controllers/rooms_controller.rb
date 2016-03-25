@@ -1,6 +1,4 @@
 class RoomsController < ApplicationController
-  load_and_authorize_resource
-
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   # GET /rooms
@@ -23,10 +21,12 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    @room = Room.new(game_params)
+    @room = Room.new(name: room_params[:name])
     @room.host = current_user
+
     if @room.save
-      redirect_to @room, notice: 'Game was successfully created.'
+      @room.tables = room_params[:tables].map { |table| Table.new(name: table[:name]) }
+      redirect_to @room, notice: 'Room was successfully created.'
     else
       render :new
     end
@@ -34,8 +34,8 @@ class RoomsController < ApplicationController
 
   # PATCH/PUT /rooms/1
   def update
-    if @room.update(game_params)
-      redirect_to @room, notice: 'Game was successfully updated.'
+    if @room.update(room_params)
+      redirect_to @room, notice: 'Room was successfully updated.'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1
   def destroy
     @room.destroy
-    redirect_to games_url, notice: 'Game was successfully destroyed.'
+    redirect_to rooms_url, notice: 'Room was successfully destroyed.'
   end
 
   def find
@@ -55,7 +55,7 @@ class RoomsController < ApplicationController
       @room = Room.find(params[:id])
     end
 
-    def game_params
-      params.require(:room).permit(:name, :tables)
+    def room_params
+      params.require(:room).permit(:name, tables: [:name])
     end
 end

@@ -10,7 +10,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'devise', '= 3.5.6'
-gem 'cancancan'
 gem 'react-rails', '~> 1.6.0'
 
 group :development, :test do
