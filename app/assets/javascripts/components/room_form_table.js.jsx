@@ -10,8 +10,11 @@ var RoomFormTable = React.createClass({
   render: function() {
     return (
       <div>
+        {this.props.table.id
+          ? <input type="hidden" name="room[tables][][id]" value={this.props.table.id} />
+          : null}
         <label htmlFor="table_name">Name:  </label>
-        <input ref="name" type="text" name="room[tables][][name]" id="table_name" defaultValue={this.props.name} />
+        <input ref="name" type="text" name="room[tables][][name]" id="table_name" defaultValue={this.props.table.name} />
         <span className={'glyphicon glyphicon-remove'} onClick={this.onClose}></span>
       </div>
     );

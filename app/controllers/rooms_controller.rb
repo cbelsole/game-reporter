@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    @room = Room.new(name: room_params[:name])
+    @room = Room.new(room_params.permit(:name))
     @room.host = current_user
 
     if @room.save
@@ -34,7 +34,17 @@ class RoomsController < ApplicationController
 
   # PATCH/PUT /rooms/1
   def update
-    if @room.update(room_params)
+    if @room.update(room_params.permit(:name))
+      @room.tables = room_params[:tables].map do |table_hash|
+        if table_id = table_hash.delete(:id)
+          table = Table.find(table_id)
+          table.update(table_hash)
+          table
+        else
+           Table.new(table_hash)
+        end
+      end
+
       redirect_to @room, notice: 'Room was successfully updated.'
     else
       render :edit
@@ -56,6 +66,6 @@ class RoomsController < ApplicationController
     end
 
     def room_params
-      params.require(:room).permit(:name, tables: [:name])
+      params.require(:room).permit(:name, tables: [:id, :name])
     end
 end
