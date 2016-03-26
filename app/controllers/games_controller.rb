@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   # GET /games
@@ -21,9 +22,20 @@ class GamesController < ApplicationController
 
   # POST /games
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(game_params.permit(
+      :after_extra_turn_action,
+      :extra_turns,
+      :games_per_pairing,
+      :name,
+      :players_per_table,
+      :rounds,
+      :time_per_round,
+      :use_game_clock
+    ))
     @game.host = current_user
+
     if @game.save
+      @game.rooms = game_params[:rooms].map { |id| Room.find(id) }
       redirect_to @game, notice: 'Game was successfully created.'
     else
       render :new
@@ -56,6 +68,16 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:name, :rounds, :games_per_pairing, :extra_turns, :after_extra_turn_action, :use_game_clock, :time_per_round)
+      params.require(:game).permit(
+        :after_extra_turn_action,
+        :extra_turns,
+        :games_per_pairing,
+        :name,
+        :players_per_table,
+        :rounds,
+        :time_per_round,
+        :use_game_clock,
+        rooms: []
+      )
     end
 end

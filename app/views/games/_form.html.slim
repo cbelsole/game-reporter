@@ -11,6 +11,9 @@
   = f.label :rounds
   = f.number_field :rounds
   br
+  = f.label :players_per_table
+  = f.number_field :players_per_table
+  br
   = f.label :games_per_pairing
   = f.number_field :games_per_pairing
   br
@@ -29,7 +32,7 @@
   h2 Rooms
 
   = f.label :room_n
-  = select("rooms", "id", options_from_collection_for_select(current_user.rooms, :id, :name), {prompt: 'Select a room'})
+  = select_tag("game[rooms][]", options_from_collection_for_select(current_user.rooms, :id, :name), {prompt: 'Select a room'})
   br
 
   = link_to 'New Room', new_room_path

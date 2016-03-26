@@ -1,6 +1,32 @@
 p#notice = notice
-h1 #{@game.name}
-br
+
+.page-header
+  h1
+    = @game.name
+    small= " Round: #{@game.current_round} of #{@game.rounds} (#{@game.time_per_round} minutes)   "
+    button.btn.btn-primary type="button" Start Round
+
+- @game.rooms.each do |room|
+  h2= room.name
+  table.table.table-striped
+    thead
+      tr
+        th Table
+        - @game.players_per_table.times do |i|
+          th= "Player #{i + 1}"
+        th Result
+    tbody
+      - room.tables.each do |table|
+        tr
+          td= table.name
+          - table.users do |user|
+            td user.name
+          - (@game.players_per_table - table.users.count).times do
+            td
+              button.btn.btn-primary type="button" assign player to table
+          td win/loss/draw
+
+
 = link_to 'Edit', edit_game_path(@game)
 '|
 = link_to 'Back', games_path

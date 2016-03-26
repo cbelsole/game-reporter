@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  validates_presence_of :after_extra_turn_action, :extra_turns, :games_per_pairing, :host_id, :name, :rounds
+  validates_presence_of :after_extra_turn_action, :extra_turns, :games_per_pairing, :host_id, :name, :players_per_table, :rounds
   validates_inclusion_of :active, :use_game_clock, in: [true, false]
 
   before_save :default_values
@@ -8,6 +8,8 @@ class Game < ActiveRecord::Base
 
   belongs_to :host, foreign_type: :host_id, class_name: User
   has_and_belongs_to_many :users
+  has_many :rooms
+
   private
 
   def default_values
