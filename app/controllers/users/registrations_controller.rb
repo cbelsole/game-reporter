@@ -9,9 +9,16 @@ before_filter :configure_sign_up_params, only: [:create]
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if params[:guest]
+      create_or_merge_guest_user
+      yield resource if block_given?
+      respond_with resource, location: after_sign_up_path_for(guest_user)
+    else
+      params[:user][:guest] = false
+      super
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,6 +49,8 @@ before_filter :configure_sign_up_params, only: [:create]
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.for(:sign_up) << :role
+    devise_parameter_sanitizer.for(:sign_up) << :name
+    devise_parameter_sanitizer.for(:sign_up) << :guest
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -51,7 +60,17 @@ before_filter :configure_sign_up_params, only: [:create]
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    new_game_path
+    if resource.is_a?(User)
+      if resource.host?
+        new_game_path
+      elsif resource.player?
+        find_games_path
+      else
+        root_path
+      end
+    else
+      super
+    end
   end
 
   # The path used after sign up for inactive accounts.

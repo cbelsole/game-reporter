@@ -32,6 +32,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.integer :role, default: 0
       t.integer :table_id
+      t.string :name, null: false
+      t.boolean :guest, null: false
 
       t.timestamps null: false
     end

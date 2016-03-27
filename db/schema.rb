@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160323015711) do
   end
 
   create_table "games_users", force: :cascade do |t|
-    t.integer  "games_id",   null: false
+    t.integer  "game_id",    null: false
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 20160323015711) do
     t.string   "last_sign_in_ip"
     t.integer  "role",                   default: 0
     t.integer  "table_id"
+    t.string   "name",                                null: false
+    t.boolean  "guest",                               null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
