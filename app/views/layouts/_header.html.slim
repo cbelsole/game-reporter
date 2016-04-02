@@ -7,7 +7,7 @@ nav.navbar.navbar-default
           span.icon-bar
           span.icon-bar
           span.icon-bar
-      a.navbar-brand href="/" Game Reporter
+      a.navbar-brand href="#{header_logo_link(current_or_guest_user)}" Game Reporter
     - if current_user
       - if current_user.host?
         ul.nav.navbar-nav
@@ -15,23 +15,23 @@ nav.navbar.navbar-default
             = link_to "Games", games_path
           li
             = link_to "Rooms", rooms_path
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.dropdown
-              a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-                = current_user.name
-                span.caret
-              ul.dropdown-menu
-                li
-                  a href="#"  Profile
-                li
-                  a href="#"  Stats
-                li
-                  = link_to('Logout', destroy_user_session_path)
       - elsif current_user.player?
         ul.nav.navbar-nav
           li
             = link_to "Find a game", find_games_path
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              = current_user.name
+              span.caret
+            ul.dropdown-menu
+              li
+                a href="#"  Profile
+              li
+                a href="#"  Stats
+              li
+                = link_to('Logout', destroy_user_session_path)
     - elsif guest_user
       ul.nav.navbar-nav
         li
