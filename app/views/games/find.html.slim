@@ -1,0 +1,9 @@
+h1 Find a game
+
+h2 Enter a game code
+= form_tag join_games_path, method: :get do |f|
+  = label_tag :game_code
+  = text_field_tag :code
+  .actions = submit_tag "Find Game"
+
+h2 Closest games

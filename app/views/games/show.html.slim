@@ -5,6 +5,7 @@ p#notice = notice
     = @game.name
     small= " Round: #{@game.current_round} of #{@game.rounds} (#{@game.time_per_round} minutes)   "
     button.btn.btn-primary type="button" Start Round
+  h3 Game Join Code: #{@game.code}
 
 - @game.rooms.each do |room|
   h2= room.name

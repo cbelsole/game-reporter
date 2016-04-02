@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :show, :new, :create, :update, :edit] do
     collection do
       get :find
+      get :join
     end
   end
 

@@ -60,6 +60,16 @@ class GamesController < ApplicationController
   def find
   end
 
+  def join
+    if @game = Game.find_by(code: params[:code])
+      @game.users << current_or_guest_user unless @game.users.include?(current_or_guest_user)
+      redirect_to @game
+    else
+      flash[:error] = "could not find game with code #{params[:code]}"
+      redirect_to find_games_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
