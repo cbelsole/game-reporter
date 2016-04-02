@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
-  get 'welcome/index'
+  get 'welcome/about'
 
   resources :games, only: [:index, :show, :new, :create, :update, :edit] do
     collection do

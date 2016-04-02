@@ -62,7 +62,8 @@ before_filter :configure_sign_up_params, only: [:create]
   def after_sign_up_path_for(resource)
     if resource.is_a?(User)
       if resource.host?
-        new_game_path
+        #new_game_path
+       welcome_about_path
       elsif resource.player?
         find_games_path
       else
