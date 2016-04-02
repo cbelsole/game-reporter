@@ -75,6 +75,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     libv8 (3.16.14.13)
+    lodash-rails (4.6.1)
+      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -207,6 +209,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   devise (= 3.5.6)
   jquery-rails
+  lodash-rails
   pg
   pry-byebug
   pry-rails

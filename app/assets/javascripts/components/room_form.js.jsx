@@ -23,11 +23,24 @@ var RoomForm = React.createClass({
     this.setState({tables: this.state.tables.filter((table) => table.name !== tableName)})
   },
 
+  submitForm(event) {
+    event.preventDefault();
+    if ( _.isEmpty(this.state.room.name.strip)) {
+      return false
+    } else if (_.isEmpty(this.state.tables)) {
+      return false
+    } else if (_.find(this.state.tables, (table) => _.isEmpty(table.name.strip))) {
+      return false
+    }
+    event.submit();
+    
+  },
+
   render() {
     let path = this.state.room.id ? `/rooms/${this.state.room.id}` : '/rooms'
 
     return (
-      <form id="new_room_form" action={path} acceptCharset="UTF-8" method="post">
+      <form id="new_room_form" action={path} acceptCharset="UTF-8" method="post" onSubmit={this.submitForm}>
         {this.state.room.id ? <input type="hidden" name="_method" value="PUT"/ > : null}
         <input name="authenticity_token" type="hidden" value={this.state.token} />
         <label htmlFor="room_name">Name:  </label>
