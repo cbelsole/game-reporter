@@ -1,10 +1,11 @@
 class GamesController < ApplicationController
+  before_action :require_host, except: [:find, :join]
   before_action :authenticate_user!, except: [:find]
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   # GET /games
   def index
-    @games = Game.all
+    @games = Game.where(host_id: current_user.id)
   end
 
   # GET /games/1

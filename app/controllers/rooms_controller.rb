@@ -1,10 +1,11 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, :except => [:show, :index]
+  before_action :require_host
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   # GET /rooms
   def index
-    @rooms = Room.all
+    @rooms = Room.where(host_id: current_user.id)
   end
 
   # GET /rooms/1

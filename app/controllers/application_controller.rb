@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_or_guest_user, :guest_user
+  helper_method :current_or_guest_user, :guest_user, :default_user_path
 
   # if user is logged in, return current_user, else return guest_user
   def current_or_guest_user
@@ -20,6 +20,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def default_user_path(user)
+    if user.try(:host?)
+      games_path
+    elsif user.try(:player?)
+      find_games_path
+    else
+      root_path
+    end
+  end
 
   # called (once) when the user logs in, insert any code your application needs
   # to hand off from guest_user to current_user.
@@ -66,4 +76,14 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  def require_admin
+    redirect_to default_user_path(current_user) unless current_user && current_user.admin?
+  end
+
+  def require_host
+    redirect_to default_user_path(current_user) unless current_user && (current_user.host? || current_user.admin?)
+  end
+
+
 end

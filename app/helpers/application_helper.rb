@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def header_logo_link(user)
+  def default_user_path(user)
     if user.try(:host?)
       games_path
     elsif user.try(:player?)
